@@ -1,0 +1,34 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+
+# ---- Virtual environment ----
+.venv/
+venv/
+ENV/
+env/
+*.envrc
+
+# ---- Environment files ----
+.env
+.env.*    # just in case you add variants like .env.dev
+
+# ---- Jupyter ----
+.ipynb_checkpoints
+*.ipynb
+
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
+
+# ---- IDE/project files ----
+.vscode/
+.idea/
+*.iml
