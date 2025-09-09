@@ -29,13 +29,6 @@ The agent is a small graph with three nodes:
 
 ## ▶️ How to Run
 
-### Single-shot mode
-Run one task and exit:
-```bash
-python agent.py --task "what is 12 * (3+4)?"
-python agent.py --task "which file mentions embeddings?"
-````
-
 ### Interactive mode (multi-turn REPL)
 
 Stay in a loop until you type `exit`:
