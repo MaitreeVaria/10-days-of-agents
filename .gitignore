@@ -32,3 +32,17 @@ Thumbs.db
 .vscode/
 .idea/
 *.iml
+
+# Vector DBs / indexes
+**/index/
+**/chroma.sqlite3
+*.bin
+*.parquet
+
+# Python env/bytecode
+.venv/
+__pycache__/
+*.pyc
+
+# Local graph images (keep if you want)
+# output.png
