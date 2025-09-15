@@ -1,0 +1,7 @@
+TODO LIST
+
+1. Finish implementing search_local_docs to read from ./data.
+2. Add input validation and a safe whitelist for run_shell_safe.
+3. Test client-server communication using stdio transport.
+4. Write README.md with instructions for running Day04 examples.
+5. Stretch goal: add authentication token and simple rate limiting.
