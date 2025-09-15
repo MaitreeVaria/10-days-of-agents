@@ -4,6 +4,7 @@ This repository documents my **10–day challenge** to build one new AI agent ev
 The difficulty ramps up each day — starting with simple tool-using agents, adding memory and planning,  
 and ending with a capstone multi-agent system with observability and MCP integration.  
 
+[Link to Challenge Guildlines](https://docs.google.com/document/d/1Fbsb-b-gN5iFUzXmv-3HsjXGZFGeTAmNFsp8DhTu8zE/edit?usp=sharing)
 ---
 
 ## 📅 Daily Projects
