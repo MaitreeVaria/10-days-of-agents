@@ -1,0 +1,54 @@
+{
+  "task": "Find mentions of MCP in my notes and save a 1-line summary to mcp.txt",
+  "created_at": "2025-09-17T00:00:30.789287",
+  "steps": [
+    {
+      "id": "s1",
+      "tool": "search_local_docs",
+      "input": {
+        "query": "MCP",
+        "top_k": 5
+      },
+      "expect": "results contain mention(s) of MCP",
+      "on_fail": "retry",
+      "retries": 1,
+      "status": "error",
+      "attempts": 2,
+      "started_at": 1758067234.348127,
+      "finished_at": 1758067234.350523,
+      "elapsed_ms": 2.4,
+      "input_rendered": {
+        "query": "MCP",
+        "top_k": 5
+      },
+      "output": [
+        {
+          "title": "notes.md",
+          "snippet": "# Notes on MCP and Agents  - MCP stands for Model Context Protocol. It defines a standard way for AI models and clients to discover and call external tools. - T",
+          "path": "notes.md",
+          "score": 4
+        }
+      ],
+      "result": "[{\"title\": \"notes.md\", \"snippet\": \"# Notes on MCP and Agents  - MCP stands for Model Context Protocol. It defines a standard way for AI models and clients to discover and call external tools. - T\", \"p"
+    },
+    {
+      "id": "s2",
+      "tool": "file_write_safe",
+      "input": {
+        "path": "Day05/out/mcp.txt",
+        "text": "<1-line summary about MCP based on found info>"
+      },
+      "expect": "file is created with a 1-line summary",
+      "on_fail": "ask_user",
+      "retries": 0
+    }
+  ],
+  "logs": [
+    {
+      "step": "s1",
+      "tool": "search_local_docs",
+      "ok": false,
+      "elapsed_ms": 2.4
+    }
+  ]
+}
