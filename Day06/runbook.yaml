@@ -1,0 +1,10 @@
+steps:
+  - name: create issue for day 6
+    tool: github.create_issue
+    params:
+      owner: "MaitreeVaria"
+      repo: "10-days-of-agents"
+      title: "Day 6: Ops Agent"
+      body: "Created automatically by my agent!"
+    idempotency:
+      key: "gh_issue:MaitreeVaria/10-days-of-agents:Day 6: Ops Agent"
