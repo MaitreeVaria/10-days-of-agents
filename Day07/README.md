@@ -124,13 +124,14 @@ All agents write **only** under `Day07/out/` with simple **locks** to avoid clob
 
 ```mermaid
 graph LR
-    Supervisor --> Researcher
-    Supervisor --> Coder
-    Supervisor --> Critic
-    Researcher --|notes.md| B[Blackboard + out/]
-    Coder --|mcp.md| B
-    Critic --|review.md| B
+    S["Supervisor"] --> R["Researcher"]
+    S --> C["Coder"]
+    S --> Q["Critic"]
+    R --|notes.md| B["Blackboard and out"]
+    C --|mcp.md| B
+    Q --|review.md| B
     B <-->|reads/writes| S
+
 ```
 
 ---
