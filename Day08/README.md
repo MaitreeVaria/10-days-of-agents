@@ -1,5 +1,4 @@
 
-```markdown
 # Day 08 — Tool Mesh via MCP (with Rate Limits, Circuit Breaker, and Cache)
 
 Turn the Day-7 multi-agent system into a **tool mesh**: every tool lives behind an MCP server, and agents (Researcher, Coder, Critic) only call tools via an MCP **client adapter**. The **Supervisor** and **Blackboard** stay conceptually the same.
@@ -271,5 +270,3 @@ Expected flow:
 * Time warnings: some scripts were updated to **timezone-aware UTC** (e.g., `datetime.now(UTC)`).
 * The web server is **stubbed** to be deterministic; swap it for real search when you’re ready.
 * The adapter currently launches a **fresh server process per call** for simplicity—moving to long-lived daemons or HTTP is a natural follow-up.
-
-```
