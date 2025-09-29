@@ -1,0 +1,19 @@
+{
+  "f1565d11e441639dc0e9a05f5b2e18f13b4cc25b209774fe97ecbcae84983314": {
+    "ts": 1759180221.368571,
+    "result": {
+      "hits": [
+        {
+          "title": "Model Context Protocol (spec)",
+          "url": "https://github.com/modelcontextprotocol/spec",
+          "snippet": "MCP standardizes how AI agents and tools communicate."
+        },
+        {
+          "title": "Intro to MCP",
+          "url": "https://openai.com/index/model-context-protocol/",
+          "snippet": "Overview and motivation for MCP as a tool interface."
+        }
+      ]
+    }
+  }
+}

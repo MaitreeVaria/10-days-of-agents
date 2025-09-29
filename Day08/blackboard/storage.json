@@ -1,0 +1,733 @@
+{
+  "run_id": "run-20250929-192234",
+  "version": "0.5",
+  "started_at": "2025-09-29T19:22:34Z",
+  "updated_at": "2025-09-29T19:22:34Z",
+  "task": {
+    "id": "day08-rcr",
+    "goal": "Research \u2192 Code \u2192 Review via MCP servers",
+    "scope": {
+      "in": [
+        "produce notes (web/docs), summary, and review"
+      ],
+      "out": []
+    },
+    "constraints": {
+      "paths_allowed": [
+        "out/**"
+      ],
+      "max_file_kb": 256,
+      "deadline": null
+    },
+    "acceptance": [
+      {
+        "type": "file_exists",
+        "path": "out/mcp.md"
+      },
+      {
+        "type": "file_exists",
+        "path": "out/review.md"
+      }
+    ],
+    "budget": {
+      "max_steps": 80,
+      "max_tool_calls": 50,
+      "max_seconds": 300
+    },
+    "notes": ""
+  },
+  "subtasks": [
+    {
+      "id": "st-001",
+      "owner": "researcher",
+      "kind": "research_request",
+      "status": "done",
+      "input": {
+        "topic": "MCP",
+        "num_sources": 2,
+        "notes_path": "notes.md"
+      },
+      "output": {
+        "summary": "Wrote out/notes.md with 2 sources",
+        "artifacts": [
+          "a-001"
+        ],
+        "citations": [
+          "https://github.com/modelcontextprotocol/spec",
+          "https://openai.com/index/model-context-protocol/"
+        ]
+      },
+      "attempts": 0,
+      "started_at": "2025-09-29T19:22:34Z",
+      "finished_at": "2025-09-29T19:22:34Z",
+      "depends_on": []
+    },
+    {
+      "id": "st-002",
+      "owner": "coder",
+      "kind": "code_request",
+      "status": "done",
+      "input": {
+        "out_path": "mcp.md",
+        "source_path": "out/notes.md",
+        "summary_words": 120
+      },
+      "output": {
+        "summary": "Wrote out/mcp.md",
+        "artifacts": [
+          "a-002"
+        ],
+        "citations": []
+      },
+      "attempts": 0,
+      "started_at": "2025-09-29T19:22:34Z",
+      "finished_at": "2025-09-29T19:22:34Z",
+      "depends_on": []
+    },
+    {
+      "id": "st-003",
+      "owner": "critic",
+      "kind": "review_request",
+      "status": "done",
+      "input": {
+        "target_path": "out/mcp.md",
+        "rubric": {
+          "max_words": 120,
+          "min_citations": 2
+        }
+      },
+      "output": {
+        "summary": "Review PASS: ok",
+        "artifacts": [
+          "a-003"
+        ],
+        "citations": []
+      },
+      "attempts": 0,
+      "started_at": "2025-09-29T19:22:34Z",
+      "finished_at": "2025-09-29T19:22:34Z",
+      "depends_on": []
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "a-001",
+      "type": "notes",
+      "name": "notes.md",
+      "path": "out/notes.md",
+      "content_ref": null,
+      "version": 1,
+      "owner": "researcher"
+    },
+    {
+      "id": "a-002",
+      "type": "code",
+      "name": "mcp.md",
+      "path": "out/mcp.md",
+      "content_ref": null,
+      "version": 1,
+      "owner": "coder"
+    },
+    {
+      "id": "a-003",
+      "type": "report",
+      "name": "review.md",
+      "path": "out/review.md",
+      "content_ref": null,
+      "version": 1,
+      "owner": "critic"
+    }
+  ],
+  "messages": [
+    {
+      "id": "m-001",
+      "role": "supervisor",
+      "type": "plan",
+      "content": "Seeded research_request",
+      "refs": [
+        "st-001"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-002",
+      "role": "researcher",
+      "type": "tool_call",
+      "content": "web_search \u2192 ok=True lat=68ms",
+      "refs": [
+        "st-001"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-003",
+      "role": "researcher",
+      "type": "tool_call",
+      "content": "file_write_safe \u2192 ok=True lat=23ms",
+      "refs": [
+        "st-001"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-004",
+      "role": "researcher",
+      "type": "research_result",
+      "content": "Created out/notes.md",
+      "refs": [
+        "st-001",
+        "a-001"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-005",
+      "role": "supervisor",
+      "type": "plan",
+      "content": "Queued code_request from out/notes.md",
+      "refs": [
+        "st-002"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-006",
+      "role": "coder",
+      "type": "tool_call",
+      "content": "file_read_safe \u2192 ok=True lat=20ms",
+      "refs": [
+        "st-002"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-007",
+      "role": "coder",
+      "type": "tool_call",
+      "content": "file_write_safe \u2192 ok=True lat=19ms",
+      "refs": [
+        "st-002"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-008",
+      "role": "coder",
+      "type": "code_result",
+      "content": "Created out/mcp.md",
+      "refs": [
+        "st-002",
+        "a-002"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-009",
+      "role": "supervisor",
+      "type": "plan",
+      "content": "Queued review for out/mcp.md",
+      "refs": [
+        "st-003"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-010",
+      "role": "critic",
+      "type": "tool_call",
+      "content": "file_read_safe \u2192 ok=True lat=20ms",
+      "refs": [
+        "st-003"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-011",
+      "role": "critic",
+      "type": "tool_call",
+      "content": "file_write_safe \u2192 ok=True lat=20ms",
+      "refs": [
+        "st-003"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-012",
+      "role": "critic",
+      "type": "review_result",
+      "content": "Review PASS: ok",
+      "refs": [
+        "st-003",
+        "a-003"
+      ],
+      "ts": "2025-09-29T19:22:34Z"
+    },
+    {
+      "id": "m-013",
+      "role": "supervisor",
+      "type": "status",
+      "content": "Acceptance met \u2192 stop",
+      "refs": [],
+      "ts": "2025-09-29T19:22:34Z"
+    }
+  ],
+  "decisions": [],
+  "event_log": [
+    {
+      "id": "e-001",
+      "kind": "state_change",
+      "who": "supervisor",
+      "what": "Added subtask st-001",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-001"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-002",
+      "kind": "message",
+      "who": "supervisor",
+      "what": "plan: Seeded research_request",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-001",
+        "st-001"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-003",
+      "kind": "state_change",
+      "who": "researcher",
+      "what": "Updated subtask st-001",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-001"
+      ],
+      "delta": {
+        "before": {
+          "status": "queued",
+          "attempts": 0,
+          "started_at": null,
+          "finished_at": null
+        },
+        "after": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        }
+      }
+    },
+    {
+      "id": "e-004",
+      "kind": "state_change",
+      "who": "researcher",
+      "what": "Updated subtask st-001",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-001"
+      ],
+      "delta": {
+        "before": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        },
+        "after": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        }
+      }
+    },
+    {
+      "id": "e-005",
+      "kind": "message",
+      "who": "researcher",
+      "what": "tool_call: web_search \u2192 ok=True lat=68ms",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-002",
+        "st-001"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-006",
+      "kind": "message",
+      "who": "researcher",
+      "what": "tool_call: file_write_safe \u2192 ok=True lat=23ms",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-003",
+        "st-001"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-007",
+      "kind": "io",
+      "who": "researcher",
+      "what": "Registered artifact notes.md",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "a-001",
+        "out/notes.md"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-008",
+      "kind": "state_change",
+      "who": "researcher",
+      "what": "Updated subtask st-001",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-001"
+      ],
+      "delta": {
+        "before": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        },
+        "after": {
+          "status": "done",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": "2025-09-29T19:22:34Z"
+        }
+      }
+    },
+    {
+      "id": "e-009",
+      "kind": "message",
+      "who": "researcher",
+      "what": "research_result: Created out/notes.md",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-004",
+        "st-001",
+        "a-001"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-010",
+      "kind": "state_change",
+      "who": "supervisor",
+      "what": "Added subtask st-002",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-002"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-011",
+      "kind": "message",
+      "who": "supervisor",
+      "what": "plan: Queued code_request from out/notes.md",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-005",
+        "st-002"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-012",
+      "kind": "state_change",
+      "who": "coder",
+      "what": "Updated subtask st-002",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-002"
+      ],
+      "delta": {
+        "before": {
+          "status": "queued",
+          "attempts": 0,
+          "started_at": null,
+          "finished_at": null
+        },
+        "after": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        }
+      }
+    },
+    {
+      "id": "e-013",
+      "kind": "state_change",
+      "who": "coder",
+      "what": "Updated subtask st-002",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-002"
+      ],
+      "delta": {
+        "before": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        },
+        "after": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        }
+      }
+    },
+    {
+      "id": "e-014",
+      "kind": "message",
+      "who": "coder",
+      "what": "tool_call: file_read_safe \u2192 ok=True lat=20ms",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-006",
+        "st-002"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-015",
+      "kind": "message",
+      "who": "coder",
+      "what": "tool_call: file_write_safe \u2192 ok=True lat=19ms",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-007",
+        "st-002"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-016",
+      "kind": "io",
+      "who": "coder",
+      "what": "Registered artifact mcp.md",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "a-002",
+        "out/mcp.md"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-017",
+      "kind": "state_change",
+      "who": "coder",
+      "what": "Updated subtask st-002",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-002"
+      ],
+      "delta": {
+        "before": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        },
+        "after": {
+          "status": "done",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": "2025-09-29T19:22:34Z"
+        }
+      }
+    },
+    {
+      "id": "e-018",
+      "kind": "message",
+      "who": "coder",
+      "what": "code_result: Created out/mcp.md",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-008",
+        "st-002",
+        "a-002"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-019",
+      "kind": "state_change",
+      "who": "supervisor",
+      "what": "Added subtask st-003",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-003"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-020",
+      "kind": "message",
+      "who": "supervisor",
+      "what": "plan: Queued review for out/mcp.md",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-009",
+        "st-003"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-021",
+      "kind": "state_change",
+      "who": "critic",
+      "what": "Updated subtask st-003",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-003"
+      ],
+      "delta": {
+        "before": {
+          "status": "queued",
+          "attempts": 0,
+          "started_at": null,
+          "finished_at": null
+        },
+        "after": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        }
+      }
+    },
+    {
+      "id": "e-022",
+      "kind": "state_change",
+      "who": "critic",
+      "what": "Updated subtask st-003",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-003"
+      ],
+      "delta": {
+        "before": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        },
+        "after": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        }
+      }
+    },
+    {
+      "id": "e-023",
+      "kind": "message",
+      "who": "critic",
+      "what": "tool_call: file_read_safe \u2192 ok=True lat=20ms",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-010",
+        "st-003"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-024",
+      "kind": "message",
+      "who": "critic",
+      "what": "tool_call: file_write_safe \u2192 ok=True lat=20ms",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-011",
+        "st-003"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-025",
+      "kind": "io",
+      "who": "critic",
+      "what": "Registered artifact review.md",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "a-003",
+        "out/review.md"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-026",
+      "kind": "state_change",
+      "who": "critic",
+      "what": "Updated subtask st-003",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "st-003"
+      ],
+      "delta": {
+        "before": {
+          "status": "in_progress",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": null
+        },
+        "after": {
+          "status": "done",
+          "attempts": 0,
+          "started_at": "2025-09-29T19:22:34Z",
+          "finished_at": "2025-09-29T19:22:34Z"
+        }
+      }
+    },
+    {
+      "id": "e-027",
+      "kind": "message",
+      "who": "critic",
+      "what": "review_result: Review PASS: ok",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-012",
+        "st-003",
+        "a-003"
+      ],
+      "delta": {}
+    },
+    {
+      "id": "e-028",
+      "kind": "message",
+      "who": "supervisor",
+      "what": "status: Acceptance met \u2192 stop",
+      "at": "2025-09-29T19:22:34Z",
+      "refs": [
+        "m-013"
+      ],
+      "delta": {}
+    }
+  ],
+  "locks": {},
+  "metrics": {
+    "steps": 7,
+    "tool_calls": 0,
+    "elapsed_seconds": 0
+  },
+  "_counters": {
+    "e": 28,
+    "st": 3,
+    "m": 13,
+    "a": 3,
+    "d": 0
+  }
+}

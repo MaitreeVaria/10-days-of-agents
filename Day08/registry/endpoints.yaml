@@ -1,0 +1,57 @@
+version: 1
+servers:
+  fs:
+    id: fs-mcp
+    kind: mcp
+    protocol: stdio
+    command: ["python", "server.py"]
+    cwd: "./Day08/servers/fs-mcp"
+    tools:
+      - name: file_write_safe
+        schema: 1
+        params:
+          path: str
+          text: str
+        # Usually no caching on writes; no breaker; light RL just in case
+        rate_limit: { rpm: 120, burst: 20 }
+      - name: file_read_safe
+        schema: 1
+        params:
+          path: str
+        # Reads may have small cache (e.g., 5s) if you like
+        rate_limit: { rpm: 240, burst: 40 }
+        cache_ttl_sec: 5
+
+  web:
+    id: web-mcp
+    kind: mcp
+    protocol: stdio
+    command: ["python", "server.py"]
+    cwd: "./Day08/servers/web-mcp"
+    env:
+      WEB_API_KEY: "demo-key"     # placeholder; not used by stub
+    tools:
+      - name: web_search
+        schema: 1
+        params:
+          query: str
+          top_k: int
+        # Stretch features on:
+        rate_limit: { rpm: 30, burst: 10 }      # 30 requests/min, burst 10
+        cache_ttl_sec: 60                        # cache same query for 60s
+        breaker: { fail_threshold: 3, cooldown_sec: 10 }   # open on 3 failures, cool down 10s
+
+  docs:
+    id: docs-mcp
+    kind: mcp
+    protocol: stdio
+    command: ["python", "server.py"]
+    cwd: "./Day08/servers/docs-mcp"
+    tools:
+      - name: search_local_docs
+        schema: 1
+        params:
+          query: str
+          top_k: int
+        rate_limit: { rpm: 120, burst: 20 }
+        cache_ttl_sec: 30
