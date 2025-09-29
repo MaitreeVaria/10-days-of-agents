@@ -123,14 +123,14 @@ All agents write **only** under `Day07/out/` with simple **locks** to avoid clob
 ## Architecture (diagram)
 
 ```mermaid
-flowchart LR
+graph LR
     S[Supervisor (tick)] --> R[Researcher]
     S --> C[Coder]
     S --> Q[Critic]
-    R -- notes.md --> B[(Blackboard + out/)]
-    C -- mcp.md --> B
-    Q -- review.md --> B
-    B --- S
+    R --|notes.md| B[(Blackboard + out/)]
+    C --|mcp.md| B
+    Q --|review.md| B
+    B <-->|reads/writes| S
 ```
 
 ---
@@ -152,49 +152,3 @@ flowchart LR
 * **Recursion limit**: the single-node `tick` with `Command(goto=...)` guarantees a stop. If it ever ran too many steps, the **budget** (default 60 in the demo) also halts cleanly.
 * **Paths**: use `out/...` (not `day07/out/...`) in acceptance and when referring to artifacts.
 * **Deprecation warning**: if you see `datetime.utcnow()` warnings, swap to `datetime.datetime.now(datetime.UTC)` in future patches (doesn’t affect this run).
-
----
-
-# Screenshots to add (put under `Day07/images/`)
-
-Keep it lean—**2 required** for the README, and **3 optional** if you want extra clarity.
-
-## Required (2)
-
-1. **`images/blackboard_event_log.png`**
-
-   * Open `Day07/blackboard/storage.json`.
-   * Capture the bottom of `event_log` showing: `Added subtask` → `research_result` → `code_result` → `review_result` → final `status` (“Acceptance met → stop”).
-   * Tip: collapse top sections so the log is visible.
-
-2. **`images/out_files.png`**
-
-   * Explorer/terminal view of `Day07/out/` showing `notes.md`, `mcp.md`, `review.md`.
-
-## Optional (nice to have)
-
-3. **`images/mcp_preview.png`**
-
-   * Open `Day07/out/mcp.md` and capture ~the whole file (confirm ≤120 words & 2 URLs in “Sources:”).
-
-4. **`images/review_preview.png`**
-
-   * Open `Day07/out/review.md` and capture the PASS/FAIL report with word count and citation count.
-
-5. **`images/arch.png`**
-
-   * Export the Mermaid diagram as PNG (via GitHub preview or Mermaid Live) and include it here.
-
----
-
-## Where to reference screenshots in the README
-
-Add these lines near the “How it works” or “Screenshots” section:
-
-```markdown
-### Screenshots
-
-![Blackboard event log](images/blackboard_event_log.png)
-
-![Out folder artifacts](images/out_files.png)
-
