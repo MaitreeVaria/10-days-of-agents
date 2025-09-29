@@ -1,0 +1,157 @@
+{
+  "run_id": "run-inmemory",
+  "version": "0.1",
+  "task": {
+    "id": "task-graph-001",
+    "goal": "LangGraph demo: code then review",
+    "scope": {
+      "in": [
+        "create + review a file"
+      ],
+      "out": []
+    },
+    "constraints": {
+      "paths_allowed": [
+        "out/**"
+      ],
+      "max_file_kb": 256,
+      "deadline": null
+    },
+    "acceptance": [
+      {
+        "type": "file_exists",
+        "path": "out/hello.txt"
+      },
+      {
+        "type": "file_exists",
+        "path": "out/review.md"
+      }
+    ],
+    "budget": {
+      "max_steps": 50,
+      "max_tool_calls": 50,
+      "max_seconds": 120
+    },
+    "notes": ""
+  },
+  "subtasks": [
+    {
+      "id": "st-001",
+      "owner": "coder",
+      "kind": "code_request",
+      "status": "done",
+      "input": {
+        "out_path": "hello.txt",
+        "content": "Hello from LangGraph!\n"
+      },
+      "output": {
+        "summary": "Wrote out/hello.txt",
+        "artifacts": [
+          "a-001"
+        ],
+        "citations": []
+      },
+      "attempts": 0,
+      "depends_on": [],
+      "started_at": "2025-09-29T02:13:22Z",
+      "finished_at": "2025-09-29T02:13:22Z"
+    },
+    {
+      "id": "st-002",
+      "owner": "critic",
+      "kind": "review_request",
+      "status": "done",
+      "input": {
+        "target_path": "out/hello.txt",
+        "rubric": {
+          "max_words": 120
+        }
+      },
+      "output": {
+        "summary": "Review PASS",
+        "artifacts": [
+          "a-002"
+        ],
+        "citations": []
+      },
+      "attempts": 0,
+      "depends_on": [],
+      "started_at": "2025-09-29T02:13:22Z",
+      "finished_at": "2025-09-29T02:13:22Z"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "a-001",
+      "type": "code",
+      "name": "hello.txt",
+      "path": "out/hello.txt",
+      "version": 1
+    },
+    {
+      "id": "a-002",
+      "type": "report",
+      "name": "review.md",
+      "path": "out/review.md",
+      "version": 1
+    }
+  ],
+  "messages": [
+    {
+      "id": "m-001",
+      "role": "supervisor",
+      "type": "plan",
+      "content": "Seeded initial code_request",
+      "refs": [
+        "st-001"
+      ],
+      "ts": "2025-09-29T02:13:22Z"
+    },
+    {
+      "id": "m-002",
+      "role": "coder",
+      "type": "code_result",
+      "content": "Created out/hello.txt",
+      "refs": [
+        "st-001"
+      ],
+      "ts": "2025-09-29T02:13:22Z"
+    },
+    {
+      "id": "m-003",
+      "role": "supervisor",
+      "type": "plan",
+      "content": "Queued review for out/hello.txt",
+      "refs": [
+        "st-002"
+      ],
+      "ts": "2025-09-29T02:13:22Z"
+    },
+    {
+      "id": "m-004",
+      "role": "critic",
+      "type": "review_result",
+      "content": "Review PASS",
+      "refs": [
+        "st-002"
+      ],
+      "ts": "2025-09-29T02:13:22Z"
+    },
+    {
+      "id": "m-005",
+      "role": "supervisor",
+      "type": "status",
+      "content": "Acceptance met \u2192 stop",
+      "refs": [],
+      "ts": "2025-09-29T02:13:22Z"
+    }
+  ],
+  "metrics": {
+    "steps": 5
+  },
+  "_counters": {
+    "st": 2,
+    "a": 2,
+    "m": 5
+  }
+}

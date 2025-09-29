@@ -1,0 +1,78 @@
+{
+  "run_id": "run-20250929-030109",
+  "version": "0.4",
+  "started_at": "2025-09-29T03:01:09Z",
+  "updated_at": "2025-09-29T03:01:09Z",
+  "task": {
+    "id": "day07-final",
+    "goal": "Research \u2192 Code \u2192 Review using in-memory state + file persistence",
+    "scope": {
+      "in": [
+        "produce notes, summary, and review"
+      ],
+      "out": []
+    },
+    "constraints": {
+      "paths_allowed": [
+        "out/**"
+      ],
+      "max_file_kb": 256,
+      "deadline": null
+    },
+    "acceptance": [
+      {
+        "type": "file_exists",
+        "path": "out/mcp.md"
+      },
+      {
+        "type": "file_exists",
+        "path": "out/review.md"
+      }
+    ],
+    "budget": {
+      "max_steps": 60,
+      "max_tool_calls": 50,
+      "max_seconds": 300
+    },
+    "notes": ""
+  },
+  "subtasks": [],
+  "artifacts": [],
+  "messages": [
+    {
+      "id": "m-001",
+      "role": "supervisor",
+      "type": "status",
+      "content": "Acceptance met \u2192 stop",
+      "refs": [],
+      "ts": "2025-09-29T03:01:09Z"
+    }
+  ],
+  "decisions": [],
+  "event_log": [
+    {
+      "id": "e-001",
+      "kind": "message",
+      "who": "supervisor",
+      "what": "status: Acceptance met \u2192 stop",
+      "at": "2025-09-29T03:01:09Z",
+      "refs": [
+        "m-001"
+      ],
+      "delta": {}
+    }
+  ],
+  "locks": {},
+  "metrics": {
+    "steps": 1,
+    "tool_calls": 0,
+    "elapsed_seconds": 0
+  },
+  "_counters": {
+    "e": 1,
+    "st": 0,
+    "m": 1,
+    "a": 0,
+    "d": 0
+  }
+}
