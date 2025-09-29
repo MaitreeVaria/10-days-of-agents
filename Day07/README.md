@@ -120,22 +120,6 @@ All agents write **only** under `Day07/out/` with simple **locks** to avoid clob
 
 ---
 
-## Architecture
-
-```mermaid
-graph LR
-    S["Supervisor"] --> R["Researcher"]
-    S --> C["Coder"]
-    S --> Q["Critic"]
-    R --|notes.md| B["Blackboard and out"]
-    C --|mcp.md| B
-    Q --|review.md| B
-    B <-->|reads/writes| S
-
-```
-
----
-
 ## Acceptance checklist
 
 * [x] Supervisor creates subtasks in order (even if pre-planned/stubbed).
