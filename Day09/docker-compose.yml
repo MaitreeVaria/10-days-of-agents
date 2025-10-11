@@ -1,0 +1,148 @@
+# Day09/docker-compose.yml
+
+x-common-env: &common-env
+  PYTHONUNBUFFERED: "1"
+  PYTHONPATH: "/workspace"
+  # OpenTelemetry (client-side)
+  OTEL_SERVICE_NAME: "agents-app"
+  OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317"
+  OTEL_TRACES_EXPORTER: "otlp"
+  OTEL_METRICS_EXPORTER: "none"
+  OTEL_LOGS_EXPORTER: "none"
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  app:
+    build:
+      context: ..
+      dockerfile: Day09/app/Dockerfile
+    container_name: day09-app
+    environment:
+      <<: *common-env
+      OTEL_SERVICE_NAME: "agents-app"
+      RQ_REDIS_URL: "redis://redis:6379/0"
+    volumes:
+      - ..:/workspace                    # mount repo root
+      - repo-out:/workspace/Day08/out
+      - repo-logs:/workspace/Day09/logs
+    working_dir: /workspace
+    command: ["python", "Day09/app/main.py"]
+    depends_on:
+      redis:
+        condition: service_healthy
+      otel-collector:
+        condition: service_started
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: ..
+      dockerfile: Day09/worker/Dockerfile
+    container_name: day09-worker
+    environment:
+      <<: *common-env
+      OTEL_SERVICE_NAME: "agents-worker"
+      RQ_REDIS_URL: "redis://redis:6379/0"
+    volumes:
+      - ..:/workspace                    # mount repo root
+      - repo-out:/workspace/Day08/out
+      - repo-logs:/workspace/Day09/logs
+    working_dir: /workspace
+    command: ["python", "Day09/worker/worker.py"]
+    depends_on:
+      redis:
+        condition: service_healthy
+      otel-collector:
+        condition: service_started
+    restart: unless-stopped
+
+  # --- MCP servers (one container each) ---
+  fs-mcp:
+    build:
+      context: ..
+      dockerfile: Day09/servers/fs-mcp/Dockerfile
+    container_name: day09-fs-mcp
+    environment:
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ..:/workspace
+      - repo-out:/workspace/Day08/out
+    working_dir: /workspace/Day09/servers/fs-mcp
+    command: ["python", "server.py"]
+    healthcheck:
+      test: ["CMD-SHELL", "echo '{\"id\":1,\"method\":\"list_tools\"}' | python server.py | grep file_write_safe"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  web-mcp:
+    build:
+      context: ..
+      dockerfile: Day09/servers/web-mcp/Dockerfile
+    container_name: day09-web-mcp
+    environment:
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace/Day09/servers/web-mcp
+    command: ["python", "server.py"]
+    healthcheck:
+      test: ["CMD-SHELL", "echo '{\"id\":1,\"method\":\"list_tools\"}' | python server.py | grep web_search"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  docs-mcp:
+    build:
+      context: ..
+      dockerfile: Day09/servers/docs-mcp/Dockerfile
+    container_name: day09-docs-mcp
+    environment:
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ..:/workspace
+    working_dir: /workspace/Day09/servers/docs-mcp
+    command: ["python", "server.py"]
+    healthcheck:
+      test: ["CMD-SHELL", "echo '{\"id\":1,\"method\":\"list_tools\"}' | python server.py | grep search_local_docs"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  # --- OpenTelemetry Collector + Jaeger ---
+  otel-collector:
+    image: otel/opentelemetry-collector:0.104.0
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ./otel-collector/config.yaml:/etc/otelcol/config.yaml:ro
+    ports:
+      - "4317:4317"   # OTLP gRPC
+      - "4318:4318"   # OTLP HTTP
+    restart: unless-stopped
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "14250:14250"  # gRPC
+      - "14268:14268"  # HTTP ingestion
+    restart: unless-stopped
+
+volumes:
+  repo-out:
+  repo-logs:

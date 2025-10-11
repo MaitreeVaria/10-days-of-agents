@@ -1,0 +1,8 @@
+flask==3.0.3
+redis==5.0.7
+rq==1.16.2
+PyYAML==6.0.2
+opentelemetry-sdk==1.26.0
+opentelemetry-exporter-otlp==1.26.0
+opentelemetry-instrumentation-requests==0.47b0
+langgraph>=0.2.29,<0.3
