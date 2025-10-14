@@ -21,17 +21,6 @@ streamlit run Day10/app/streamlit_app.py
 - After download, place the CSV under `Day10/data/` and run `Day10/scripts/build_duckdb.py` to build a local DuckDB at `Day10/db/rides.duckdb` (these large files are git-ignored).
 - Main view: `v_rides_analytics`
 
-## Demo Script (suggested)
-1) Ask: "Top routes by trips." → Generate → Run
-2) Ask: "Focus on Uber rides." → Generate (memory stores a preference)
-3) Ask: "Average price by cab type." → Generate → editor shows SQL biased to Uber filter → Run
-4) Ask: "Top routes by trips in San Francisco." → Generate → Run
-5) Show sidebar Settings → toggle tracing, click Generate/Run, and point to terminal `[trace]` logs
-6) Show history expanders and use "Load into editor"
-
-Optional memory reset:
-- Sidebar → Settings → "Clear semantic memory"
-
 ## Notes
 - Read-only guard allows only `SELECT/WITH/EXPLAIN/SHOW/DESCRIBE/PRAGMA`
 - NL→SQL sanitization removes code fences and keeps first statement
