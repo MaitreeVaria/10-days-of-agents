@@ -1,8 +1,3 @@
-perfect — let’s keep it **clean and visual**. below is the full `Day02/README.md` with space for screenshots of your **chat interactions** and the **workflow graph**.
-
----
-
-```markdown
 # Day 02 — Web + Files Agent (RAG with citations)
 
 Goal: teach the agent to (1) search the web and (2) answer from **local docs** using a tiny RAG pipeline — with **citations**.
@@ -85,21 +80,21 @@ python Day02/agent.py
 
 #### Local PDF query
 
-<img src="./assets/pdf_query_example.png" alt="Example: asking about domain adaptation from local PDF" width="600"/>
+<img src="images/pdf_query_example.png" alt="Example: asking about domain adaptation from local PDF" width="600"/>
 
 #### Local Markdown query
 
-<img src="./assets/md_query_example.png" alt="Example: asking about JavaScript Algorithms README" width="600"/>
+<img src="images/md_query_example.png" alt="Example: asking about JavaScript Algorithms README" width="600"/>
 
 #### Web search query
 
-<img src="./assets/web_query_example.png" alt="Example: web search about LangGraph" width="600"/>
+<img src="images/web_query_example.png" alt="Example: web search about LangGraph" width="600"/>
 
 ---
 
 ### Workflow graph
 
-<img src="./images/output.png" alt="LangGraph workflow diagram" width="600"/>
+<img src="images/output.png" alt="LangGraph workflow diagram" width="600"/>
 
 ---
 
@@ -124,15 +119,4 @@ python Day02/agent.py
 
 Day 2 complete ✅ — the agent can ground on the web **and** your own files, with citations.
 
-```
 
----
-
-👉 you just need to save your **terminal/chat screenshots** into a folder like `Day02/assets/` with names:
-- `pdf_query_example.png`
-- `md_query_example.png`
-- `web_query_example.png`
-- `day02_graph.png`
-
-Would you like me to also give you a quick script/snippet to auto-generate the **graph PNG** (like you did on Day 1) so you can save it directly into `assets/day02_graph.png`?
-```
