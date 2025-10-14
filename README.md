@@ -17,7 +17,7 @@ and ending with a capstone multi-agent system with observability and MCP integra
 - [Day 07 – Multi-Agent Supervisor](./Day07)  
 - [Day 08 – MCP at Scale](./Day08)  
 - [Day 09 – Observability & Scaling](./Day09)  
-- [Day 10 – Capstone Workspace Assistant](./Day10)  
+- [Day 10 – Capstone QueryGPT](./Day10)  
 
 ---
 
