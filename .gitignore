@@ -46,3 +46,7 @@ __pycache__/
 
 # Local graph images (keep if you want)
 # output.png
+
+# ---- Day10 data/DB artifacts ----
+Day10/data/*.csv
+Day10/db/*.duckdb
